@@ -1,23 +1,55 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {useNavigate} from 'react-router-dom';
-
+import axios from 'axios'
 function Addstudents(props) {
     let navigate = useNavigate();
     let [name,setName]=useState("");
     let [email,setEmail]=useState("");
     let [mobile,setMobile]=useState("");
     let [cls,setCls]=useState("");
-
-    let handleSubmit = ()=>{
-        let newData = {name,email,mobile,"class":cls};
-        let newArray = [...props.data.students];
-        newArray.push(newData);
-        props.data.setStudents(newArray)
-        navigate("/all-students")
-
-    }
+    const url = "https://61ee1f7ed593d20017dbac50.mockapi.io/students/"
+    //Using fetch
+    //let handleSubmit = async()=>{
+       // await fetch(url,{
+         //   method:'POST',
+          //  headers:{
+              //  'Content-Type':'application/json'
+        //},
+        //body:JSON.stringify({
+          //  name,
+          //  email,
+           // mobile,
+           // class:cls
+       // })
+    //})
+    //.then(response=>response.json())
+        //.then(res=>{
+        //    navigate("/all-students")
+       // })
+        //.catch(err=>{
+        //    console.log(err)
+       // })
+   // }
+   let handleSubmit=async()=>{
+       try{
+           let respone=await axios.post(url,{
+               name,
+               email,
+               mobile,
+               class:cls,
+           })
+           console.log(respone)
+           if(respone.status==201)
+                navigate('/all-students')
+            else
+            alert("Internal server error")    
+       }
+       catch(error){
+           console.log(error)
+       }
+   }
     return (
         <Form>
 
@@ -51,5 +83,4 @@ function Addstudents(props) {
         
     )
 }
-
 export default Addstudents;
