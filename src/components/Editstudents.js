@@ -11,7 +11,7 @@ function EditStudent(props) {
     let [email,setEmail]=useState("");
     let [mobile,setMobile]=useState("");
     let [cls,setCls]=useState("");
-    const url = "https://61ee1f7ed593d20017dbac50.mockapi.io/students/"
+    const url = "https://61ee1f99d593d20017dbac52.mockapi.io/students"
     //Using fetch
    // let getData = async()=>{
       //  await fetch(url+params.id)
