@@ -42,7 +42,7 @@ let getData = async()=>{
 //Using fetch delete
     //let handleDelete = async(i)=>{
      //   await fetch(url+i,{
-            method:'DELETE'
+            //method:'DELETE'
       //  })
       //  .then(response=>response.json())
       //  .then(data=>{
