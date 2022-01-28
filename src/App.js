@@ -30,8 +30,7 @@ function App() {
                       <Route path='/dashboard' element={<Dashboard data={data}/>}/>
                       <Route path ='/all-students' element={<Allstudents />}/>
                       <Route path = '/add-student' element={<Addstudents />}/>
-                      <Route path='/edit-student/:id' element={<Editstudents />}/>
-                      
+                      <Route path='/edit-student/:id' element={<Editstudents />}/>                      
                        <Route path='/hooks' element={<Hooks/>}/>
                        <Route path = '/' element={<Dashboard data={data}/>}/>
                 </Routes>

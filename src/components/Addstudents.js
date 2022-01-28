@@ -1,55 +1,66 @@
-import React,{useState,useContext} from 'react';
+import React,{useContext,useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios'
+// import {StudentContext} from '../App'
+
 function Addstudents(props) {
+
+    // let context = useContext(StudentContext)
+
     let navigate = useNavigate();
     let [name,setName]=useState("");
     let [email,setEmail]=useState("");
     let [mobile,setMobile]=useState("");
     let [cls,setCls]=useState("");
-    const url = "https://61ee1f99d593d20017dbac52.mockapi.io/students"
+    const url = "https://61ee1f7ed593d20017dbac50.mockapi.io/students/"
+
     //Using fetch
-    //let handleSubmit = async()=>{
-       // await fetch(url,{
-         //   method:'POST',
-          //  headers:{
-              //  'Content-Type':'application/json'
-        //},
-        //body:JSON.stringify({
-          //  name,
-          //  email,
-           // mobile,
-           // class:cls
-       // })
-    //})
-    //.then(response=>response.json())
-        //.then(res=>{
-        //    navigate("/all-students")
-       // })
-        //.catch(err=>{
-        //    console.log(err)
-       // })
-   // }
-   let handleSubmit=async()=>{
-       try{
-           let respone=await axios.post(url,{
-               name,
-               email,
-               mobile,
-               class:cls,
-           })
-           console.log(respone)
-           if(respone.status==201)
+    // let handleSubmit = async()=>{
+    //     await fetch(url,{
+    //         method:'POST',
+    //         headers:{
+    //             'Content-Type':'application/json'
+    //         },
+    //         body:JSON.stringify({
+    //             name,
+    //             email,
+    //             mobile,
+    //             class:cls
+    //         })
+    //     })
+    //     .then(response=>response.json())
+    //     .then(res=>{
+    //         navigate("/all-students")
+    //     })
+    //     .catch(err=>{
+    //         console.log(err)
+    //     })
+
+    // }
+
+
+    //using axios
+    let handleSubmit = async()=>{
+        try {
+            let response = await axios.post(url,{
+                name,
+                email,
+                mobile,
+                class:cls
+            })
+            console.log(response)
+            if(response.status==201)
                 navigate('/all-students')
             else
-            alert("Internal server error")    
-       }
-       catch(error){
-           console.log(error)
-       }
-   }
+                alert("Internal server error!")
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <Form>
 
@@ -80,7 +91,7 @@ function Addstudents(props) {
                 Submit
             </Button>
         </Form>
-        
     )
 }
-export default Addstudents;
+
+export default Addstudents

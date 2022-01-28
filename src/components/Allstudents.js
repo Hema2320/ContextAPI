@@ -1,13 +1,9 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import {Link} from 'react-router-dom'
 import axios from 'axios';
-
-
-const url = "https://61ee1f99d593d20017dbac52.mockapi.io/students"
-
-
+const url = "https://61ee1f7ed593d20017dbac50.mockapi.io/students/"
 function Allstudents() {
     let [students,setStudents]=useState([]);
 
@@ -16,40 +12,43 @@ function Allstudents() {
       },[])
 
 
-    //Using fetch getdata
-     // let getData = async()=>{
-       // await fetch(url)
-        //.then(response => response.json())
-        //.then(res=>{
-         // setStudents(res)
-        //})
-        //.catch(err=>{
-          //console.log(err)
-        //})
-      //}
+    //Using fetch
+    //   let getData = async()=>{
+    //     await fetch(url)
+    //     .then(response => response.json())
+    //     .then(res=>{
+    //       setStudents(res)
+    //     })
+    //     .catch(err=>{
+    //       console.log(err)
+    //     })
+    //   }
 
-// GET using axios
-
-
-let getData = async()=>{
-    try {
-        let response = await axios.get(url)
-        setStudents(response.data)
-    } catch (error) {
-        console.log(error)
+    // get using axios
+    let getData = async()=>{
+        try {
+            let response = await axios.get(url)
+            setStudents(response.data)
+        } catch (error) {
+            console.log(error)
+        }
     }
-}
-//Using fetch delete
-    //let handleDelete = async(i)=>{
-     //   await fetch(url+i,{
-            //method:'DELETE'
-      //  })
-      //  .then(response=>response.json())
-      //  .then(data=>{
-      //      getData()
-      //  })
-    //}
-let handleDelete = async(i)=>{
+
+    //using fetch
+    // let handleDelete = async(i)=>{
+    //     await fetch(url+i,{
+    //         method:'DELETE'
+    //     })
+    //     .then(response=>response.json())
+    //     .then(data=>{
+    //         getData()
+    //     })
+    // }
+
+
+    //delete using axios
+
+    let handleDelete = async(i)=>{
         try{
             let response = await axios.delete(url+i)
             if(response.status==200)
@@ -62,7 +61,7 @@ let handleDelete = async(i)=>{
     }
 
     return <>
-    <Table striped bordered hover>
+        <Table striped bordered hover>
             <thead>
                 <tr>
                     <th>#</th>
@@ -74,7 +73,7 @@ let handleDelete = async(i)=>{
             </thead>
             <tbody>
                 {
-                    students.map((e,i)=>{
+                    students.map((e)=>{
                         return <tr key={e.id}>
                                     <td>{e.id}</td>
                                     <td>{e.name}</td>
@@ -86,7 +85,9 @@ let handleDelete = async(i)=>{
                                         <Link to={`/edit-student/${e.id}`}>
                                         <Button variant='primary'>Edit</Button>
                                         </Link>
-                                         
+                                        {/* <Button variant='primary' onClick={()=>{
+                                            navigate('/edit-student/'+i)
+                                        }}>Edit</Button> */}
                                     </td>
                                 </tr>
                     })
@@ -94,8 +95,6 @@ let handleDelete = async(i)=>{
             </tbody>
         </Table>
     </>
-        
-    
 }
 
-export default Allstudents;
+export default Allstudents

@@ -3,7 +3,25 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {useParams,useNavigate} from 'react-router-dom';
 import axios from 'axios'
-function EditStudent(props) {
+// import {StudentContext} from '../App'
+
+function Editstudents(props) {
+
+
+    // useEffect(()=>{
+
+    // },[])----> Only during the first render of conmponent
+
+    // useEffect(()=>{
+
+    // },[name,email]) ---> Called during first render of component and also it will render if any values of Dependency array changes
+
+    // useEffect(()=>{
+
+    // })-----> Called for each rendering 
+ 
+    // let context = useContext(StudentContext);
+
 
     let params = useParams();
     let navigate = useNavigate();
@@ -11,76 +29,81 @@ function EditStudent(props) {
     let [email,setEmail]=useState("");
     let [mobile,setMobile]=useState("");
     let [cls,setCls]=useState("");
-    const url = "https://61ee1f99d593d20017dbac52.mockapi.io/students"
-    //Using fetch
-   // let getData = async()=>{
-      //  await fetch(url+params.id)
-        //.then(response => response.json())
-        //.then(res=>{
-         //   setName(res.name);
-           // setEmail(res.email);
-            //setMobile(res.mobile);
-            //setCls(res.class)
-        //})
-        //.catch(err=>{
-          //  console.log(err)
-        //})
-        //}
-// Using axios
-        let getData = async()=>{
-            try {
-             let response = await axios.get(url+params.id)
-             setName(response.data.name);
-             setEmail(response.data.email);
-             setMobile(response.data.mobile);
-             setCls(response.data.class)
-            } catch (error) {
-                console.log(error)
-            }
-         }
+    const url = "https://61ee1f7ed593d20017dbac50.mockapi.io/students/"
 
-         let handleSubmit = async()=>{
-            try {
-             let response = await axios.put(url+params.id,{
-                 name,
-                 email,
-                 mobile,
-                 class:cls
-             });
-             if(response.status==200)
-             {
-                 navigate("/all-students")
-             }
-            } catch (error) {
-                console.log(error)
-            }
-         }
-     
-        useEffect(()=>{
-            getData();
-        },[])
-//    let handleSubmit = async()=>{
-  //      await fetch(url+params.id,{
-    //        method:'PUT',
-      //      headers:{
-        //        'Content-Type':'application/json'
-          //  },
-            //body:JSON.stringify({
-              //  name,
-               // email,
-                //mobile,
-                //class:cls
-            //})
-        //})
-        //.then(response=>response.json())
-        //.then(res=>{
-         //   navigate("/all-students")
-        //})
-        //.catch(err=>{
-          //  console.log(err)
-        //})
+    //Usinng FETCH
+    // let getData = async()=>{
+    //     await fetch(url+params.id)
+    //     .then(response => response.json())
+    //     .then(res=>{
+    //         setName(res.name);
+    //         setEmail(res.email);
+    //         setMobile(res.mobile);
+    //         setCls(res.class)
+    //     })
+    //     .catch(err=>{
+    //         console.log(err)
+    //     })
+    //     }
 
-    //}
+    //using axios
+    let getData = async()=>{
+       try {
+        let response = await axios.get(url+params.id)
+        setName(response.data.name);
+        setEmail(response.data.email);
+        setMobile(response.data.mobile);
+        setCls(response.data.class)
+       } catch (error) {
+           console.log(error)
+       }
+    }
+        
+    // let handleSubmit = async()=>{
+    //     await fetch(url+params.id,{
+    //         method:'PUT',
+    //         headers:{
+    //             'Content-Type':'application/json'
+    //         },
+    //         body:JSON.stringify({
+    //             name,
+    //             email,
+    //             mobile,
+    //             class:cls
+    //         })
+    //     })
+    //     .then(response=>response.json())
+    //     .then(res=>{
+    //         navigate("/all-students")
+    //     })
+    //     .catch(err=>{
+    //         console.log(err)
+    //     })
+
+    // }
+
+
+    let handleSubmit = async()=>{
+       try {
+        let response = await axios.put(url+params.id,{
+            name,
+            email,
+            mobile,
+            class:cls
+        });
+        if(response.status==200)
+        {
+            navigate("/all-students")
+        }
+       } catch (error) {
+           console.log(error)
+       }
+    }
+
+
+    useEffect(()=>{
+        getData();
+    },[])
 
     return (
         <Form>
@@ -115,4 +138,4 @@ function EditStudent(props) {
     )
 }
 
-export default EditStudent
+export default Editstudents
